@@ -458,8 +458,6 @@ let rightMouseDown = false;
 const mouseSensitivity = 0.004;
 
 // ====================================
-// 10. 滑鼠控制
-// ====================================
 
 renderer.domElement.addEventListener(
   'contextmenu',
@@ -471,43 +469,34 @@ renderer.domElement.addEventListener(
 renderer.domElement.addEventListener(
   'mousedown',
   (event) => {
-
-    if (event.button === 2) {
-
+    if (event.button === 0) {
       rightMouseDown = true;
 
       document.getElementById(
         'message'
       ).textContent =
-        '移動滑鼠，旋轉你的視角';
-
+        '移動滑鼠，可以旋轉攝影機';
     }
-
   }
 );
 
 window.addEventListener(
   'mouseup',
   (event) => {
-
-    if (event.button === 2) {
-
+    if (event.button === 0) {
       rightMouseDown = false;
 
       document.getElementById(
         'message'
       ).textContent =
-        '按住滑鼠右鍵並移動，可以旋轉攝影機';
-
+        '按住滑鼠左鍵並移動，可以旋轉攝影機';
     }
-
   }
 );
 
 window.addEventListener(
   'mousemove',
   (event) => {
-
     if (!rightMouseDown) return;
 
     cameraYaw -=
@@ -516,16 +505,14 @@ window.addEventListener(
     cameraPitch -=
       event.movementY * mouseSensitivity;
 
-    // 限制上下角度
-
     cameraPitch = THREE.MathUtils.clamp(
       cameraPitch,
       -0.35,
       1.0
     );
-
   }
 );
+
 
 // ====================================
 // 11. 鍵盤控制
